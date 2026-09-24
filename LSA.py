@@ -39,14 +39,38 @@ class LSA:
                 if word not in stop:
                     new_words.append(word)
 
-            new_corpus[i] = " ".join(new_words)
-
-
-
-        
+            new_corpus[i] = new_words
                 
 
         return new_corpus
+    
+    def term_doc_matrix(self,docs):
+        vocab = []
+
+        for words in docs:
+            for word in words:
+                if word not in vocab:
+                    vocab.append(word)
+        vocab.sort()
+
+        term_to_row = {}
+
+        for row in range(len(vocab)):
+            term_to_row[vocab[row]] = row
+
+        num_terms = len(vocab)
+
+        num_docs=len(docs)
+
+        TDM = np.zeros((num_terms,num_docs))
+
+        for col in range(len(docs)):
+            for word in docs[col]:
+                row = term_to_row[word]
+                TDM[row,col] = TDM[row,col]+1
+
+        return TDM
+
     
 
 

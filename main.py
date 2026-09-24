@@ -16,5 +16,8 @@ model = LSA()
 
 value = model.strip(corpus)
 
-print(corpus)
 print(value)
+
+term_doc_matrix = model.term_doc_matrix(value)
+
+print(term_doc_matrix)
